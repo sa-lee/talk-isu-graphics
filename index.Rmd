@@ -2,7 +2,7 @@
 title: 'Casting Multiple Shadows'
 subtitle: "High-Dimensional Interactive Data Visualisation with Tours and Embeddings"  
 author: "<span style = 'font-size: 90%;'>Stuart Lee, Monash University</span>"
-date: "<span style = 'font-size: 90%;'>Pre-submission Seminar<br><br> Tuesday 10th March, 2020 </span> <br><br>"
+date: "<span style = 'font-size: 90%;'>ISU Graphics Seminar<br><br> Thursday 15th October, 2020 </span> <br><br>"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -52,7 +52,7 @@ library(liminal)
 
 # Overview
 
-.large[
+.vlarge[
 * Big Picture
 * Orientation: t-distributed stochastic neighbour embedding
 * Orientation: tours
@@ -64,7 +64,7 @@ library(liminal)
 
 # Big picture: dimensionality reduction
 
-.large[
+.vlarge[
 Let $X$ be an $n \times p$ real data matrix, where $n$ is the number of observations in $p$ dimensions. 
 
 The goal of dimensionality reduction (DR) is to find a low dimensional data representation $Y$, such that $Y$ is an $n \times d$ matrix where $d \ll p$.   
@@ -72,14 +72,14 @@ The goal of dimensionality reduction (DR) is to find a low dimensional data repr
 ---
 class: middle
 
-.large[
+.vlarge[
 _Aspiration: the DR procedure  will remove **noise** in the data while revealing **hidden patterns and structure**._
 ]
 
 ---
 # DR approaches
 
-.large[_Linear_: $Y$ is a linear transformation of the input $X$, i.e. principal components analysis (PCA).
+.vlarge[_Linear_: $Y$ is a linear transformation of the input $X$, i.e. principal components analysis (PCA).
 
 _Non-linear_: $Y$ is generated via a pre-processed form of the input $X$ such as the $k$-nearest neighbours graph or a kernel transformation. 
 ]
@@ -211,7 +211,7 @@ include_graphics("img/gradients-ecology.jpg")
 ---
 class: inverse, middle
 
-.large[
+.vlarge[
 **Assumption**: 
 the DR form is _"faithful"_ to the source high-dimensional data
 ] 
@@ -220,7 +220,7 @@ the DR form is _"faithful"_ to the source high-dimensional data
 
 # Orientation with t-SNE
 
-.large[**t-distributed stochastic neighbour embedding**
+.vlarge[**t-distributed stochastic neighbour embedding**
 
 - extremely popular in bioinformatics and machine learning
 - human interpretation can be difficult due to distortions
@@ -229,7 +229,7 @@ the DR form is _"faithful"_ to the source high-dimensional data
 
 ---
 
-.large[
+.vlarge[
 Our high dimensional dataset oriented row wise
 
 $$X = [\mathbf{x_1}, ..., \mathbf{x_n}] \subset \mathbb{R}^p$$ 
@@ -242,7 +242,7 @@ _for visualisation  $d \in \{1,2,3\}$_.
 
 # How does it work?
 
-.large[_Key idea:_ transform pairwise $\mathbf{x_i}$ and $\mathbf{x_j}$ 
+.vlarge[_Key idea:_ transform pairwise $\mathbf{x_i}$ and $\mathbf{x_j}$ 
 distances to joint probabilities using a Gaussian kernel
 
 $p_{i|j} = \frac{\exp(-\lVert \mathbf{x_i - x_j} \rVert ^ 2 / 2\sigma_i^2)}{\sum_{k \ne i}\exp(-\lVert \mathbf{x_j - x_k} \rVert ^ 2 / 2\sigma_i^2)}$ and $p_{ij} = \frac{p_{i|j} + p_{j|i}}{2}$
@@ -252,7 +252,7 @@ $p_{i|j} = \frac{\exp(-\lVert \mathbf{x_i - x_j} \rVert ^ 2 / 2\sigma_i^2)}{\sum
 
 # How does it work?
 
-.large[The variance $\sigma_{i}^2$ of the Gaussian is chosen based on user supplied value of perplexity:
+.vlarge[The variance $\sigma_{i}^2$ of the Gaussian is chosen based on user supplied value of perplexity:
 
 $\text{perplexity}_i = \exp(-\log(2) \sum_{i \ne j}p_{j|i}\log_2(p_{j|i}))$
 
@@ -264,7 +264,7 @@ _Perplexity controls the number of nearest neighbours._
 
 # How does it work?
 
-.large[
+.vlarge[
 _Key idea:_ transform pairwise distances $\mathbf{y_i}$ and $\mathbf{y_j}$ to joint probabilities using a Cauchy kernel:
 
 $$q_{ij} = \frac{w_{ij}}{Z}$$ 
@@ -276,7 +276,7 @@ where $w_{ij} = \frac{1}{ 1 + \lVert \mathbf{y_i - y_j} \rVert ^ 2}$ and $Z = \s
 
 # How does it work?
 
-.large[
+.vlarge[
 Obtain $Y$ so that Kullback-Leibler divergence between
 the probability distributions $\mathcal{P}$ and $\mathcal{Q}$ is minimised:
 
@@ -287,7 +287,7 @@ $$\mathcal{L} = \sum_{i \ne j} p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
 
 # How does it work?
 
-.large[
+.vlarge[
 The loss function can be recast in terms of .red[attractive] and .blue[repulsive] forces:
 
 $$\mathcal{L} = \color{red}{-\sum_{i \ne j} p_{ij}\log w_{ij}} + \color{blue}{\log\sum_{i \ne j} w_{ij}}$$
@@ -298,7 +298,7 @@ $$\mathcal{L} = \color{red}{-\sum_{i \ne j} p_{ij}\log w_{ij}} + \color{blue}{\l
 
 # Important Parameters
 
-.large[
+.vlarge[
 - perplexity 
 - early exaggeration 
 - step size (learning rate)
@@ -324,8 +324,6 @@ p +
   scale_color_viridis_c()
 ```
 ]
-
-
 
 
 ---
@@ -368,7 +366,7 @@ tsne_view
 
 # t-SNE gives a lot of flexibility
 
-.large[
+.vlarge[
 - there's a lot of parameters to tweak
 - emphasises locality, distance between clusters of points can be misleading
 - size of clusters can be misleading 
@@ -380,14 +378,14 @@ tsne_view
 class: middle, inverse, center
 
 
-# tSNE is state of the art, but how can we help analysts understand it?
+# t-SNE is state of the art, but how can we help analysts understand it?
 
 
 ---
 
 # Orientation with tours
 
-.large[
+.vlarge[
 
 - a technique from statistical graphics
 - has been successfully applied to problems in particle physics and model interpretation
@@ -400,7 +398,7 @@ class: middle, inverse, center
 
 # Description
 
-.large[
+.vlarge[
 Recall our $n \times p$ data matrix $X$
 
 A tour is sequence of $p \times d$ orthonormal projection matrices (bases) $A_{t \in \mathbb{N}}$, where $d$ is typically $1$ or $2$.
@@ -412,7 +410,7 @@ A tour allows us to explore the set of all $d$-dimensional subspaces via the pro
 
 # How does it work?
 
-.large[
+.vlarge[
 We visualise the sequence of low dimensional projections:
 
 $$Y_{t} = XA_{t}$$
@@ -422,7 +420,7 @@ as animated scatter or density plots.
 
 ---
 
-.large[**Grand Tour:** generate a set of random orthnormal bases, interpolate between them.]
+.vlarge[**Grand Tour:** generate a set of random orthnormal bases, interpolate between them.]
 
 ```{r basis-view, out.width="50%", echo = FALSE}
 include_graphics("img/bases-generation.png")
@@ -433,7 +431,7 @@ include_graphics("img/bases-generation.png")
 
 class: middle
 
-.large[The tour is enhanced by **interactivity**:
+.vlarge[The tour is enhanced by **interactivity**:
 
 - play/pause the current projection
 - zooming to find 'interesting' points
@@ -450,7 +448,7 @@ class: inverse, middle, center
 
 # `liminal` an R package for interactive tours
 
-.large[
+.vlarge[
 - extends the `tourr` package but uses a modern R API
 - leverage client-side visualisation and interaction via `vegawidget`
 - treats the basis generation/interpolation steps as a reactive stream  
@@ -465,7 +463,7 @@ class: middle, center
 
 # Tours as reactive streams
 
-.large[
+.vlarge[
 - don't need to realise the entire sequence
 - instead generate new bases according to a fixed frame rate
 - allows user interactions to play/pause on the current view
@@ -479,7 +477,7 @@ class: middle, center
 
 # Thesis driven development
 
-.large[
+.vlarge[
 - `liminal` began life as [`sneezy`](https://github.com/sa-lee/sneezy)
 - __desire__ to have interactivity built in from the start
 - __building__ on top of `vegawidget`
@@ -518,7 +516,7 @@ _(Unwin, 2018)_
 
 # `liminal` an R package for ensembling tours and embeddings
 
-.large[
+.vlarge[
 - **concatenated views:** see local and global structures
 - **user interactions:** verify cluster shapes and locations
 - **quality checks:** interrogate an embedding with reference
@@ -551,7 +549,7 @@ class: inverse, middle, center
 ---
 class: inverse, middle
 
-.large[
+.vlarge[
 **Assumption**: 
 the DR form is _"faithful"_ to the source high-dimensional data
 ] 
@@ -592,7 +590,7 @@ class: middle, center
 # Spatial linking
 
 
-.large[
+.vlarge[
 
 **distortion**: points that are far away in one view, will show neighbours that are close together in the opposing view.
 
@@ -604,7 +602,7 @@ class: middle, center
 ---
 # Spatial linking
 
-.large[
+.vlarge[
 **Key idea:** Look up nearest neighbours graph
 from points that lie in a brushing region.
 
@@ -639,8 +637,8 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 
 # Thesis driven development: part 2
 
-.large[
-- adding interactions increases code complexity
+.vlarge[
+- vegalite increases code complexity
 - __latency:__  round-trips between R and Javascript 
 - __discoverability:__ specifying UI elements at the code level or within the app?
 - __displays:__ appropriate visual encodings for large _n_
@@ -654,93 +652,14 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 .medium[
 - Implementation and testing of spatial brushes
 - Cleaner user controls and interface
-- Scaling up for larger datasets
-- Exploration of other non-linear embedding techniques
 - Getting the package on CRAN
 ]
 
 
 ---
-class: inverse, middle, center
-
-# How does this fit in?
-
----
-class: center, middle
-
-```{r dse, echo = FALSE, out.width="80%"}
-include_graphics("img/data-science.png")
-```
-
-_(Wickham and Wickham, 2017)_
-
----
-class: center, middle
-
-```{r dse-human, echo = FALSE, out.width="80%"}
-include_graphics("img/data-science-wrangle.png")
-```
-
----
-class: center, middle
-
-```{r dse-human-me, echo = FALSE, out.width="80%"}
-include_graphics("img/data-science-wrangle.png")
-```
-
-.large[
-👩🏽
-🔬🧬🧬👨🏻
-🔬
-]
----
-
-```{r plyranges, echo = FALSE, out.width="80%"}
-include_graphics("img/plyranges-paper.png")
-```
-
-```{r plyranges-hex, echo = FALSE, out.width="30%"}
-include_graphics("img/plyranges.png")
-```
-
----
-
-```{r f1000, echo = FALSE, out.width = "80%"}
-include_graphics("img/f1000.png")
-```
-
----
-
-```{r superintronic-paper, out.width = "80%"}
-include_graphics("img/superintronic-paper.png")
-```
-
-```{r superintronic-hex, out.width = "30%"}
-include_graphics("img/superintronic.png")
-```
----
-class: middle, center 
-
-```{r back-to-cycle, echo = FALSE, out.width="80%"}
-include_graphics("img/data-science-wrangle.png")
-```
-.large[
-👩🏽
-🔬🧬🧬👨🏻
-🔬
-]
-
----
-class: middle, center
-
-```{r me-now, echo = FALSE, out.width="80%"}
-include_graphics("img/data-science-explore.png")
-```
-
----
 # Take homes
 
-.large[
+.vlarge[
 
 * DR oriented workflows are complemented by the tour
 * Composing multiple views provides more insight 
@@ -753,13 +672,13 @@ include_graphics("img/data-science-explore.png")
 
 # Thanks
 
-.large.pull-left[
+.vlarge.pull-left[
 - Di Cook
 - Matt Ritchie
 - Paul Harrison
 ]
 
-.large.pull-right[
+.vlarge.pull-right[
 - David Frazier
 - Charity Law
 - Ursula Laa
@@ -786,7 +705,7 @@ include_graphics("img/data-science-explore.png")
 
 # Learning more
 
-.large[
+.vlarge[
 `r icon::fa_box_open() ` [liminal](https://github.com/sa-lee/liminal)
 
 `r icon::fa('link')` [talk link](https://bit.ly/39vj1mF)
