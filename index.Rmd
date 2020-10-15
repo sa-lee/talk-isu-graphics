@@ -649,10 +649,15 @@ from points that lie in a brushing region.
 
 class: inverse middle
 
-# WIP: `virgo` for interactive graphics in R
+# `virgo` for interactive graphics in R
+
+## Joint work with [Earo Wang](earo.wang)
 
 ---
 
+class: middle center
+
+# Demo 5: interactive graphics with `virgo`
 
 
 ---
