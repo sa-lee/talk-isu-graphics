@@ -10,7 +10,7 @@ obtained from an NLDR method, we can preserve global structure and through user 
 the NLDR view may be misleading. We show a few use cases to demonstrate our approach.
 
 
-# Slide available [here](https://bit.ly/39vj1mF)
+# Slide available [here](https://sa-lee.github.io/talk-isu-graphics/)
 
 # Take home messages 
 
