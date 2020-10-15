@@ -1,6 +1,6 @@
 # Casting multiple shadows: high-dimensional interactive data visualisation with tours and embeddings 
 
-## Stuart Lee - presubmission seminar
+## Stuart Lee - ISU graphics seminar
 
 # Abstract
 
@@ -9,8 +9,6 @@ local and global structure in the resulting visualisation. We present a visual a
 obtained from an NLDR method, we can preserve global structure and through user interactions like linked brushing observe where
 the NLDR view may be misleading. We show a few use cases to demonstrate our approach.
 
-The implementation of our framework is available as an R package called `liminal` available at https://github.com/sa-lee/liminal.
-
 
 # Slide available [here](https://bit.ly/39vj1mF)
 
@@ -18,6 +16,5 @@ The implementation of our framework is available as an R package called `liminal
 
 * DR oriented workflows are complimented by the tour
 * Composing multiple views provides more insight 
-* User interactions allow us to explore and check *tSNE* views
-
+* User interactions allow us to explore and check *t-SNE* views
 
