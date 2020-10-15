@@ -15,9 +15,6 @@ output:
       countIncrementalSlides: false
 ---
 
-layout: true
-<div class="my-footer"><span>bit.ly/39vj1mF • @sa-lee</span></div> 
-
 ```{r setup, include=FALSE}
 # options(htmltools.dir.version = FALSE, width = 120)
 # NOTE TO SELF: The CSS styles were created in `create-sal-theme.R`
@@ -48,15 +45,14 @@ library(liminal)
 ```
 
 
----
-
 # Overview
 
-.vlarge[
+.large[
 * Big Picture
 * Orientation: t-distributed stochastic neighbour embedding
 * Orientation: tours
 * `liminal` package and usage examples
+* Developments in interactive graphics with R
 ]
 
 
@@ -64,7 +60,7 @@ library(liminal)
 
 # Big picture: dimensionality reduction
 
-.vlarge[
+.large[
 Let $X$ be an $n \times p$ real data matrix, where $n$ is the number of observations in $p$ dimensions. 
 
 The goal of dimensionality reduction (DR) is to find a low dimensional data representation $Y$, such that $Y$ is an $n \times d$ matrix where $d \ll p$.   
@@ -72,14 +68,14 @@ The goal of dimensionality reduction (DR) is to find a low dimensional data repr
 ---
 class: middle
 
-.vlarge[
+.large[
 _Aspiration: the DR procedure  will remove **noise** in the data while revealing **hidden patterns and structure**._
 ]
 
 ---
 # DR approaches
 
-.vlarge[_Linear_: $Y$ is a linear transformation of the input $X$, i.e. principal components analysis (PCA).
+.large[_Linear_: $Y$ is a linear transformation of the input $X$, i.e. principal components analysis (PCA).
 
 _Non-linear_: $Y$ is generated via a pre-processed form of the input $X$ such as the $k$-nearest neighbours graph or a kernel transformation. 
 ]
@@ -220,7 +216,7 @@ the DR form is _"faithful"_ to the source high-dimensional data
 
 # Orientation with t-SNE
 
-.vlarge[**t-distributed stochastic neighbour embedding**
+.large[**t-distributed stochastic neighbour embedding**
 
 - extremely popular in bioinformatics and machine learning
 - human interpretation can be difficult due to distortions
@@ -229,7 +225,7 @@ the DR form is _"faithful"_ to the source high-dimensional data
 
 ---
 
-.vlarge[
+.large[
 Our high dimensional dataset oriented row wise
 
 $$X = [\mathbf{x_1}, ..., \mathbf{x_n}] \subset \mathbb{R}^p$$ 
@@ -242,7 +238,7 @@ _for visualisation  $d \in \{1,2,3\}$_.
 
 # How does it work?
 
-.vlarge[_Key idea:_ transform pairwise $\mathbf{x_i}$ and $\mathbf{x_j}$ 
+.large[_Key idea:_ transform pairwise $\mathbf{x_i}$ and $\mathbf{x_j}$ 
 distances to joint probabilities using a Gaussian kernel
 
 $p_{i|j} = \frac{\exp(-\lVert \mathbf{x_i - x_j} \rVert ^ 2 / 2\sigma_i^2)}{\sum_{k \ne i}\exp(-\lVert \mathbf{x_j - x_k} \rVert ^ 2 / 2\sigma_i^2)}$ and $p_{ij} = \frac{p_{i|j} + p_{j|i}}{2}$
@@ -252,7 +248,7 @@ $p_{i|j} = \frac{\exp(-\lVert \mathbf{x_i - x_j} \rVert ^ 2 / 2\sigma_i^2)}{\sum
 
 # How does it work?
 
-.vlarge[The variance $\sigma_{i}^2$ of the Gaussian is chosen based on user supplied value of perplexity:
+.large[The variance $\sigma_{i}^2$ of the Gaussian is chosen based on user supplied value of perplexity:
 
 $\text{perplexity}_i = \exp(-\log(2) \sum_{i \ne j}p_{j|i}\log_2(p_{j|i}))$
 
@@ -264,7 +260,7 @@ _Perplexity controls the number of nearest neighbours._
 
 # How does it work?
 
-.vlarge[
+.large[
 _Key idea:_ transform pairwise distances $\mathbf{y_i}$ and $\mathbf{y_j}$ to joint probabilities using a Cauchy kernel:
 
 $$q_{ij} = \frac{w_{ij}}{Z}$$ 
@@ -276,7 +272,7 @@ where $w_{ij} = \frac{1}{ 1 + \lVert \mathbf{y_i - y_j} \rVert ^ 2}$ and $Z = \s
 
 # How does it work?
 
-.vlarge[
+.large[
 Obtain $Y$ so that Kullback-Leibler divergence between
 the probability distributions $\mathcal{P}$ and $\mathcal{Q}$ is minimised:
 
@@ -287,7 +283,7 @@ $$\mathcal{L} = \sum_{i \ne j} p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
 
 # How does it work?
 
-.vlarge[
+.large[
 The loss function can be recast in terms of .red[attractive] and .blue[repulsive] forces:
 
 $$\mathcal{L} = \color{red}{-\sum_{i \ne j} p_{ij}\log w_{ij}} + \color{blue}{\log\sum_{i \ne j} w_{ij}}$$
@@ -298,7 +294,7 @@ $$\mathcal{L} = \color{red}{-\sum_{i \ne j} p_{ij}\log w_{ij}} + \color{blue}{\l
 
 # Important Parameters
 
-.vlarge[
+.large[
 - perplexity 
 - early exaggeration 
 - step size (learning rate)
@@ -366,7 +362,7 @@ tsne_view
 
 # t-SNE gives a lot of flexibility
 
-.vlarge[
+.large[
 - there's a lot of parameters to tweak
 - emphasises locality, distance between clusters of points can be misleading
 - size of clusters can be misleading 
@@ -385,7 +381,7 @@ class: middle, inverse, center
 
 # Orientation with tours
 
-.vlarge[
+.large[
 
 - a technique from statistical graphics
 - has been successfully applied to problems in particle physics and model interpretation
@@ -398,7 +394,7 @@ class: middle, inverse, center
 
 # Description
 
-.vlarge[
+.large[
 Recall our $n \times p$ data matrix $X$
 
 A tour is sequence of $p \times d$ orthonormal projection matrices (bases) $A_{t \in \mathbb{N}}$, where $d$ is typically $1$ or $2$.
@@ -410,7 +406,7 @@ A tour allows us to explore the set of all $d$-dimensional subspaces via the pro
 
 # How does it work?
 
-.vlarge[
+.large[
 We visualise the sequence of low dimensional projections:
 
 $$Y_{t} = XA_{t}$$
@@ -420,7 +416,7 @@ as animated scatter or density plots.
 
 ---
 
-.vlarge[**Grand Tour:** generate a set of random orthnormal bases, interpolate between them.]
+.large[**Grand Tour:** generate a set of random orthnormal bases, interpolate between them.]
 
 ```{r basis-view, out.width="50%", echo = FALSE}
 include_graphics("img/bases-generation.png")
@@ -431,7 +427,7 @@ include_graphics("img/bases-generation.png")
 
 class: middle
 
-.vlarge[The tour is enhanced by **interactivity**:
+.large[The tour is enhanced by **interactivity**:
 
 - play/pause the current projection
 - zooming to find 'interesting' points
@@ -448,10 +444,10 @@ class: inverse, middle, center
 
 # `liminal` an R package for interactive tours
 
-.vlarge[
+.large[
 - extends the `tourr` package but uses a modern R API
 - leverage client-side visualisation and interaction via `vegawidget`
-- treats the basis generation/interpolation steps as a reactive stream  
+- treats the basis generation/interpolation steps as a reactive stream in `shiny` 
 ]
 
 
@@ -463,7 +459,7 @@ class: middle, center
 
 # Tours as reactive streams
 
-.vlarge[
+.large[
 - don't need to realise the entire sequence
 - instead generate new bases according to a fixed frame rate
 - allows user interactions to play/pause on the current view
@@ -477,7 +473,7 @@ class: middle, center
 
 # Thesis driven development
 
-.vlarge[
+.large[
 - `liminal` began life as [`sneezy`](https://github.com/sa-lee/sneezy)
 - __desire__ to have interactivity built in from the start
 - __building__ on top of `vegawidget`
@@ -487,36 +483,29 @@ class: middle, center
 
 ---
 
-class: inverse, middle, center
+class: middle, center, inverse
 
-# Casting multiple shadows
+background-image: url(img/multiple-shadows.jpg)
+background-size: cover
 
----
-
-class: middle, center
-
-```{r, echo = FALSE, out.width = "50%"}
-include_graphics("img/multiple-shadows.jpg")
-```
 
 ---
 
 # Why settle for 'just' one visualisation?
 
-.medium[
 
 ```{r, echo = FALSE, out.width = "50%"}
-include_graphics("img/ensemble-example.jpeg")
+include_graphics("img/jm-interactive.png")
 ```
-Ensemble Graphics provide new perspectives and connections 
-_(Unwin, 2018)_
-]
+
+.medium[(from __McDonald (1982)__)]
+
 
 ---
 
 # `liminal` an R package for ensembling tours and embeddings
 
-.vlarge[
+.large[
 - **concatenated views:** see local and global structures
 - **user interactions:** verify cluster shapes and locations
 - **quality checks:** interrogate an embedding with reference
@@ -587,10 +576,25 @@ class: middle, center
 
 ---
 
+class: middle inverse center
+
+# The surprising effectiveness of linked brushing
+
+---
+
+class: middle, center
+
+```{r, echo = FALSE}
+library(vembedr)
+use_align(embed_vimeo("439635812", width = 800), align = "center")
+```
+
+---
+
 # Spatial linking
 
 
-.vlarge[
+.large[
 
 **distortion**: points that are far away in one view, will show neighbours that are close together in the opposing view.
 
@@ -598,11 +602,10 @@ class: middle, center
 
 ]
 
-
 ---
 # Spatial linking
 
-.vlarge[
+.large[
 **Key idea:** Look up nearest neighbours graph
 from points that lie in a brushing region.
 
@@ -621,24 +624,13 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 ]
 
 
-<!-- # Case study: QuickDraw -->
-
-<!-- --- -->
-
-<!-- # Description -->
-
-<!-- --- -->
-
-<!-- # When does a cat look like a dog? -->
-
-<!-- --- -->
 
 ---
 
 # Thesis driven development: part 2
 
-.vlarge[
-- vegalite increases code complexity
+.large[
+- **code complexity** of interactive graphics
 - __latency:__  round-trips between R and Javascript 
 - __discoverability:__ specifying UI elements at the code level or within the app?
 - __displays:__ appropriate visual encodings for large _n_
@@ -647,24 +639,34 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 
 ---
 
+class: inverse middle
+
+# WIP: `virgo` for interactive graphics in R
+
+---
+
+
+
+---
+
 # Next steps
 
 .medium[
 - Implementation and testing of spatial brushes
-- Cleaner user controls and interface
-- Getting the package on CRAN
+- Getting the package(s) on CRAN
+
 ]
 
 
 ---
 # Take homes
 
-.vlarge[
+.large[
 
 * DR oriented workflows are complemented by the tour
 * Composing multiple views provides more insight 
 * User interactions allow us to explore and check t-SNE views
-
+* Much of design space for interactivity is still up for grabs!
 
 ]
 
@@ -672,18 +674,17 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 
 # Thanks
 
-.vlarge.pull-left[
+.large.pull-left[
 - Di Cook
 - Matt Ritchie
 - Paul Harrison
 ]
 
-.vlarge.pull-right[
-- David Frazier
-- Charity Law
-- Ursula Laa
-- Nick Tierney
+.large.pull-right[
 - Earo Wang
+- Ian Lyttle
+- Ursula Laa
+- David Frazier
 ]
 
 
@@ -708,7 +709,7 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 .vlarge[
 `r icon::fa_box_open() ` [liminal](https://github.com/sa-lee/liminal)
 
-`r icon::fa('link')` [talk link](https://bit.ly/39vj1mF)
+`r icon::fa('link')` [talk link]()
 ]
 
 

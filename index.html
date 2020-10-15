@@ -4,7 +4,8 @@
     <title>Casting Multiple Shadows</title>
     <meta charset="utf-8" />
     <meta name="author" content="Stuart Lee, Monash University" />
-    <link href="libs/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="libs/vembedr-0.1.4.9000/css/vembedr.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.0.12/css/fontawesome-all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="saltheme.css" type="text/css" />
     <link rel="stylesheet" href="extra.css" type="text/css" />
     <link rel="stylesheet" href="animate.css" type="text/css" />
@@ -16,20 +17,15 @@ class: left, middle, inverse, title-slide
 # Casting Multiple Shadows
 ## High-Dimensional Interactive Data Visualisation with Tours and Embeddings
 ### <span style="font-size: 90%;">Stuart Lee, Monash University</span>
-### <span style="font-size: 90%;">Pre-submission Seminar<br><br> Tuesday 10th March, 2020 </span> <br><br>
+### <span style="font-size: 90%;">ISU Graphics Seminar<br><br> Thursday 15th October, 2020 </span> <br><br>
 
 ---
 
 
-layout: true
-&lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/39vj1mF • @sa-lee&lt;/span&gt;&lt;/div&gt; 
 
 
 
 
-
-
----
 
 # Overview
 
@@ -38,6 +34,7 @@ layout: true
 * Orientation: t-distributed stochastic neighbour embedding
 * Orientation: tours
 * `liminal` package and usage examples
+* Developments in interactive graphics with R
 ]
 
 
@@ -126,7 +123,7 @@ class: middle
 ---
 class: inverse, middle
 
-.large[
+.vlarge[
 **Assumption**: 
 the DR form is _"faithful"_ to the source high-dimensional data
 ] 
@@ -237,8 +234,6 @@ where `\(n = 500\)` and `\(p = 10\)`
 ]
 
 
-
-
 ---
 
 # Now with more t-SNE
@@ -262,7 +257,7 @@ where `\(n = 500\)` and `\(p = 10\)`
 class: middle, inverse, center
 
 
-# tSNE is state of the art, but how can we help analysts understand it?
+# t-SNE is state of the art, but how can we help analysts understand it?
 
 
 ---
@@ -333,7 +328,7 @@ class: inverse, middle, center
 .large[
 - extends the `tourr` package but uses a modern R API
 - leverage client-side visualisation and interaction via `vegawidget`
-- treats the basis generation/interpolation steps as a reactive stream  
+- treats the basis generation/interpolation steps as a reactive stream in `shiny` 
 ]
 
 
@@ -369,26 +364,21 @@ class: middle, center
 
 ---
 
-class: inverse, middle, center
+class: middle, center, inverse
 
-# Casting multiple shadows
+background-image: url(img/multiple-shadows.jpg)
+background-size: cover
 
----
-
-class: middle, center
-
-&lt;img src="img/multiple-shadows.jpg" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Why settle for 'just' one visualisation?
 
-.medium[
 
-&lt;img src="img/ensemble-example.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
-Ensemble Graphics provide new perspectives and connections 
-_(Unwin, 2018)_
-]
+&lt;img src="img/jm-interactive.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+.medium[(from __McDonald (1982)__)]
+
 
 ---
 
@@ -428,7 +418,7 @@ class: inverse, middle, center
 ---
 class: inverse, middle
 
-.large[
+.vlarge[
 **Assumption**: 
 the DR form is _"faithful"_ to the source high-dimensional data
 ] 
@@ -466,6 +456,22 @@ class: middle, center
 
 ---
 
+class: middle inverse center
+
+# The surprising effectiveness of linked brushing
+
+---
+
+class: middle, center
+
+<div class="vembedr" align="center">
+<div>
+<iframe class="vimeo-embed" src="https://player.vimeo.com/video/439635812" width="800" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+</div>
+</div>
+
+---
+
 # Spatial linking
 
 
@@ -476,7 +482,6 @@ class: middle, center
 **diffusion**: points that are close in one view, will show neighbours that are far apart in the opposing view. 
 
 ]
-
 
 ---
 # Spatial linking
@@ -500,24 +505,13 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 ]
 
 
-&lt;!-- # Case study: QuickDraw --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Description --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # When does a cat look like a dog? --&gt;
-
-&lt;!-- --- --&gt;
 
 ---
 
 # Thesis driven development: part 2
 
-.large[
-- adding interactions increases code complexity
+.vlarge[
+- **code complexity** of interactive graphics
 - __latency:__  round-trips between R and Javascript 
 - __discoverability:__ specifying UI elements at the code level or within the app?
 - __displays:__ appropriate visual encodings for large _n_
@@ -526,73 +520,19 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 
 ---
 
+class: inverse middle
+
+# WIP: `virgo` 
+---
+
 # Next steps
 
 .medium[
 - Implementation and testing of spatial brushes
-- Cleaner user controls and interface
-- Scaling up for larger datasets
-- Exploration of other non-linear embedding techniques
-- Getting the package on CRAN
+- Getting the package(s) on CRAN
+
 ]
 
-
----
-class: inverse, middle, center
-
-# How does this fit in?
-
----
-class: center, middle
-
-&lt;img src="img/data-science.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-_(Wickham and Wickham, 2017)_
-
----
-class: center, middle
-
-&lt;img src="img/data-science-wrangle.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-class: center, middle
-
-&lt;img src="img/data-science-wrangle.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-.large[
-👩🏽
-🔬🧬🧬👨🏻
-🔬
-]
----
-
-&lt;img src="img/plyranges-paper.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-&lt;img src="img/plyranges.png" width="30%" style="display: block; margin: auto;" /&gt;
-
----
-
-&lt;img src="img/f1000.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-
-&lt;img src="img/superintronic-paper.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-&lt;img src="img/superintronic.png" width="30%" style="display: block; margin: auto;" /&gt;
----
-class: middle, center 
-
-&lt;img src="img/data-science-wrangle.png" width="80%" style="display: block; margin: auto;" /&gt;
-.large[
-👩🏽
-🔬🧬🧬👨🏻
-🔬
-]
-
----
-class: middle, center
-
-&lt;img src="img/data-science-explore.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Take homes
@@ -602,7 +542,7 @@ class: middle, center
 * DR oriented workflows are complemented by the tour
 * Composing multiple views provides more insight 
 * User interactions allow us to explore and check t-SNE views
-
+* Much of design space for interactivity is still up for grabs!
 
 ]
 
@@ -617,11 +557,10 @@ class: middle, center
 ]
 
 .large.pull-right[
-- David Frazier
-- Charity Law
-- Ursula Laa
-- Nick Tierney
 - Earo Wang
+- Ian Lyttle
+- Ursula Laa
+- David Frazier
 ]
 
 
@@ -643,10 +582,10 @@ class: middle, center
 
 # Learning more
 
-.large[
+.vlarge[
 <i class="fas  fa-box-open "></i> [liminal](https://github.com/sa-lee/liminal)
 
-<i class="fas  fa-link "></i> [talk link](https://bit.ly/39vj1mF)
+<i class="fas  fa-link "></i> [talk link]()
 ]
 
 
@@ -703,6 +642,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -720,17 +685,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {
