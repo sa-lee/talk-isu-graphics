@@ -586,7 +586,12 @@ class: middle, center
 
 ```{r, echo = FALSE}
 library(vembedr)
-use_align(embed_vimeo("439635812", width = 800), align = "center")
+use_bs_responsive(
+  use_align(
+    embed_vimeo("439635812"), 
+    align = "center"
+  )
+)
 ```
 
 ---
@@ -605,11 +610,9 @@ use_align(embed_vimeo("439635812", width = 800), align = "center")
 ---
 # Spatial linking
 
-.large[
+.vlarge[
 **Key idea:** Look up nearest neighbours graph
 from points that lie in a brushing region.
-
-Highlight the corresponding neighbours using colour or transparency in the linked view. 
 ]
 
 
@@ -648,17 +651,6 @@ class: inverse middle
 
 
 ---
-
-# Next steps
-
-.medium[
-- Implementation and testing of spatial brushes
-- Getting the package(s) on CRAN
-
-]
-
-
----
 # Take homes
 
 .large[
@@ -666,7 +658,7 @@ class: inverse middle
 * DR oriented workflows are complemented by the tour
 * Composing multiple views provides more insight 
 * User interactions allow us to explore and check t-SNE views
-* Much of design space for interactivity is still up for grabs!
+* Still much work to be done!
 
 ]
 

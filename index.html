@@ -464,9 +464,9 @@ class: middle inverse center
 
 class: middle, center
 
-<div class="vembedr" align="center">
+<div class="vembedr embed-responsive embed-responsive-16by9" align="center">
 <div>
-<iframe class="vimeo-embed" src="https://player.vimeo.com/video/439635812" width="800" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<iframe class="vimeo-embed embed-responsive-item" src="https://player.vimeo.com/video/439635812" width="533" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
 </div>
 </div>
 
@@ -486,11 +486,9 @@ class: middle, center
 ---
 # Spatial linking
 
-.large[
+.vlarge[
 **Key idea:** Look up nearest neighbours graph
 from points that lie in a brushing region.
-
-Highlight the corresponding neighbours using colour or transparency in the linked view. 
 ]
 
 
@@ -510,7 +508,7 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 
 # Thesis driven development: part 2
 
-.vlarge[
+.large[
 - **code complexity** of interactive graphics
 - __latency:__  round-trips between R and Javascript 
 - __discoverability:__ specifying UI elements at the code level or within the app?
@@ -522,16 +520,10 @@ Highlight the corresponding neighbours using colour or transparency in the linke
 
 class: inverse middle
 
-# WIP: `virgo` 
+# WIP: `virgo` for interactive graphics in R
+
 ---
 
-# Next steps
-
-.medium[
-- Implementation and testing of spatial brushes
-- Getting the package(s) on CRAN
-
-]
 
 
 ---
@@ -542,7 +534,7 @@ class: inverse middle
 * DR oriented workflows are complemented by the tour
 * Composing multiple views provides more insight 
 * User interactions allow us to explore and check t-SNE views
-* Much of design space for interactivity is still up for grabs!
+* Still much work to be done!
 
 ]
 
