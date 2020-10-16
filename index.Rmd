@@ -711,7 +711,7 @@ class: middle center
 .vlarge[
 `r icon::fa_box_open() ` [liminal](https://github.com/sa-lee/liminal)
 
-`r icon::fa('link')` [talk link]()
+`r icon::fa('link')` [talk link](https://bit.ly/314AG23)
 ]
 
 
